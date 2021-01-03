@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-     <title>Nicole's Website</title> 
-     <style>
-    body {
+    <head>  
+        <title>Nicole's Website</title> 
+        <style type="text/css">
+         body {
         background: rgb(25, 18, 105);
         color: rgb(45, 45, 45);
         padding: 10px;
@@ -64,45 +64,52 @@
     h2, h3 {
         margin: 0px;
     }
-</style>
-    </head>
     
+    /* portfolio styles */
+            #portfolio {
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+            #portfolio li {
+                background: #fff;
+                padding: 10px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+            #portfolio li:hover {
+                background: #eee;
+            } 
+
+            #portfolio a {
+                text-decoration: none;
+                color: #454545;
+            }
+        </style>
+    </head>
+
     <body>
-      <div id "all-contents"> 
+      <div id="all-contents">
         <nav>
             <h1>The Face of Nicole</h1>
             <ul>
-                <li>
-                    <a href ="index.html">Home</a>
+                <li><a href="index.html">Home</a>
                 </li>
-                <li>
-                    <a href="portfolio.html"> Portfolio</a>
+                <li><a href="portfolio.html">Portfolio</a>
                 </li>
             </ul>
-
         </nav>
-
         <main>
-            <div class = "sidebar">
-                <img src ="https://lh3.googleusercontent.com/ogw/ADGmqu82Yj94USjYh7nlemHTWSZfZGNh-IKvIO8tQKyNRg=s192-c-mo">
+            <div class="content">
+                <h1>Portfolio</h1>
+                <ul id="portfolio">
+                </ul>
             </div>
-            
-            <div class = "content">
-                <h2>A. Nicole Ray</h2>
-                <p>
-                    Commercial Laboratory Technician
-                    <div class = "interests">
-                        <h3>Interests</h3>
-                        <ul>
-                            <li> Aquariums </li>
-                            <li> Science </li>
-                            <li> Novels </li>
-                        </ul>
-                    </div>
-                </p>
-            </div>
-
         </main>
-    </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script id="portfolioScript">$(document).ready(function() {$.getJSON('projects/projects.json').then(function(data) { data.projects.forEach(function(project){ $('#portfolio').append('<li><a href="projects/' + project.name + '/">' + project.title + ' : ' + project.description + '</a></li>'); }); }); });</script>
+
     </body>
 </html>
