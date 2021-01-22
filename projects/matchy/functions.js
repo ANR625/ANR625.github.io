@@ -21,16 +21,15 @@
    - Returns `null` if no animal with that name exists */
  function search(animals,name) {
      for (var i=0; i<=animals.length-1; i++) {
-        var nameAnimal = `${animals[i]['name']}`; 
-        if (nameAnimal === name) {
+        var str = `${animals[i]['name']}`; 
+        if (str === name) {
         return animals[i];
-        }  
-     }  return null;
- } 
+        }
+     } return null;
+ }
    
  //3. Use the search bar at the top of the page to make sure your function works.
-//not quite -- adding the (return null) statement makes a test in the data.js fail????
-
+//yep
 
 //////////////////////////////////////////////////////////////////////
 // Step 2 - Replace //////////////////////////////////////////////////
@@ -42,22 +41,34 @@
    - If an animal with that name exists within the `animals` Array, replace it's entire Object with the replacement Object.
    - Otherwise do nothing.
    */
-  function replace(animals,name,replacement) {
-     for (var i=0; i>=animals.length-1; i++) {
-      if (name === animals[i].name) { 
-       delete animals[i]
-       animals.push(i);
-           }
-        }
-     }
    
+  function replace(animals,name,replacement) {
+     for (var i=0; i<=animals.length-1; i++) {
+      if (name === animals[i]['name']) { 
+       animals.splice(i, 1, replacement);
+           }
+        } 
+     }
+     
+
  //2. Preview the `index.html` page to test it on the website.
 
 //////////////////////////////////////////////////////////////////////
 // Step 3 - Remove ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
+/* 1. Write a function declaration called `remove` with a signature of `remove(animals, name)` that:
+   - Takes 2 parameters, an Array of animals, and a name of an animal on which to perform a search.
+   - If an animal with that name exists within the `animals` Array, remove it.
+ 2. Test that it works on the website.*/
 
+  function remove(animals,name) {
+     for (var i=0; i<animals.length; i++) {
+      if (name === animals[i]['name']) { 
+       animals.splice(i,1); //splice again
+           }
+        } console.log(animals);
+     }
 
 //////////////////////////////////////////////////////////////////////
 // Step 4 - Add ///////////////////////////////////////////////////
@@ -70,15 +81,27 @@
    - Has a **unique** name, meaning no other animals have that name.
    - Adds this new Object to the `animals` Array, **only** if all the other conditions pass.
    - Make sure it works.*/
+   
 
-/*function add(animals,animal){
- for (var i=0; i<=array.length-1; i++{
-  if(object.name<0) {return true;}
-   else if (object.species>0) {return true;}
- array.push(object);}
-}*/
-
-
+//Creating function add with parameters
+function add(animals,animal){
+ //checking that name is a property with a value
+ //checking that speices is a property with a value
+  if(animal.name.length > 0 && animal.species.length > 0) {
+   //if criteria above are true, looping through animals array
+    for (var i=0; i<=animals.length-1; i++){
+     //checking if the name property in existent animals is equal to the input name
+     if (animals[i].name === animal.name) {
+      //if so, then return the array of animals (without adding)
+      return animals;
+      //checking that if the input name is not equal to property value of existent animals...
+     } else if (animals[i].name !== animal.name) { 
+      //...return the animals array with the new animal object pushed in
+      return animals.push(animal);
+       }
+    }
+  }
+}
 
 
 /**

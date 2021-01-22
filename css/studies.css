@@ -1,8 +1,8 @@
 body {
-    background: rgb(125, 198, 205);
-    color: rgb(45, 45, 45);
-    padding: 10px;
-    font-family: arial;
+        background: rgb(25, 18, 105);
+        color: rgb(45, 45, 45);
+        padding: 10px;
+        font-family: arial;
 }
 header {
     font-size: 1.5em;
@@ -15,10 +15,12 @@ header {
 
 /* navigation menu */
 nav {
-    background: rgb(239, 80, 41);
-    margin: 0 auto;
-    display: flex;
-    padding: 10px;
+        background: rgb(10, 100, 170);
+        margin: 0 auto;
+        margin-bottom: 20px;
+        display: flex;
+        padding: 10px;
+        border-radius: 100px / 85px;
 }
 nav header {
     display: flex;
@@ -42,7 +44,7 @@ nav a {
 main {
     background: rgb(245, 238, 219);
     display: flex;
-    padding:inherit;
+        border-radius: 100px / 60px;
 }
 [class=content] {
     flex: 1;

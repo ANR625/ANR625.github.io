@@ -13,7 +13,10 @@
         max-width: 800px;
         margin: auto;
     }
-
+    header {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
     /* navigation menu */
     nav {
         background: rgb(10, 100, 170);
@@ -21,7 +24,13 @@
         margin-bottom: 20px;
         display: flex;
         padding: 10px;
-        border-radius: 1px 100px / 85px;
+        border-radius: 100px / 85px;
+    }
+    nav header {
+        display: flex;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        flex: 1;
     }
     nav h1 {
         display: flex;
@@ -47,10 +56,10 @@
     main {
         background: rgb(245, 238, 219);
         display: flex;
-        border-radius: 100px 1px / 120px;
+        border-radius: 100px / 60px;
     }
     .sidebar {
-        margin-right: 25px;
+        margin-right: 125px;
         padding: 10px;
     }
     .sidebar img {
@@ -97,6 +106,9 @@
                 <li><a href="index.html">Home</a>
                 </li>
                 <li><a href="portfolio.html">Portfolio</a>
+                </li>
+                <li>
+                    <a href="studies.html">Studies</a>
                 </li>
             </ul>
         </nav>
