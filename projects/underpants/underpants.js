@@ -84,18 +84,19 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
-
-_.first = function(array, num) {
+_.first = function(array,num) {
     if (Array.isArray(array)===false) {
         return [];
-    } else if (num===NaN || num===undefined) {
+    } else if (isNaN(num)===true || num===undefined) {
         return array[0];
-    } else if (num < 0) { 
+    } else if (num < 0) {
         return [];
-    } else { 
+    } else {
         return array.slice(0,num);
     }
-}
+};
+
+
 
 /** _.last
 * Arguments:
@@ -118,7 +119,7 @@ _.first = function(array, num) {
 _.last = function(array, num) {
     if (Array.isArray(array)===false) {
         return [];
-    } else if (num===NaN || num===undefined) {
+    } else if (isNaN(num)===true || num===undefined) {
         return array[array.length - 1];
      } else if (num < 0) { 
         return [];
@@ -188,11 +189,11 @@ _.contains = function(array, value){
 */
 
 _.each = function(collection, func) {
-    if (Array.isArray(collection) === true) {
-        for (var i = 0; i <= collection.length - 1; i++){
+    if (Array.isArray(collection)===true) {
+        for (var i = 0; i <= collection.length - 1; i++) {
         func(collection[i], [i], collection);
         } 
-    } else if (typeof collection === 'object'){
+    } else if (typeof collection === 'object') {
             for (var key in collection) {
             func(collection[key], key, collection);
             }
@@ -242,10 +243,10 @@ _.unique = function(array) {
 */
 
 
-_.filter = function(array, funct) {
+_.filter = function(array, func) {
     var truArray =[];
         for(var i = 0; i < array.length; i++){
-            if(funct(array[i],i,array)===true) {
+            if(func(array[i],i,array)===true) {
                 truArray.push(array[i]);
             }
         } return truArray;
@@ -265,10 +266,10 @@ _.filter = function(array, funct) {
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
-_.reject = function(array, funct) {
+_.reject = function(array, func) {
     var falseArray =[];
         for(var i = 0; i < array.length; i++){
-            if(funct(array[i],i,array)===false) {
+            if(func(array[i],i,array)===false) {
                 falseArray.push(array[i]);
             }
         } return falseArray;
@@ -294,14 +295,14 @@ _.reject = function(array, funct) {
 }
 */
 
-_.partition = function(array, funct) {
+_.partition = function(array, func) {
     var falseArray = [];
     var truArray = [];
     var subArrays =[truArray, falseArray];
     for(var i = 0; i < array.length; i++){
-            if(funct(array[i],i,array)===true) {
+            if(func(array[i],i,array)===true) {
                 truArray.push(array[i]);
-            } else if (funct(array[i],i,array)===false) {
+            } else if (func(array[i],i,array)===false) {
                 falseArray.push(array[i]);
             }
         } return subArrays;
@@ -321,16 +322,16 @@ _.partition = function(array, funct) {
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-_.map = function(collection, funct) {
+_.map = function(collection, func) {
     var finalArray = [];
     if (Array.isArray(collection) === true) {
       for(var i = 0; i<collection.length; i++) {
-        var isArray = funct(collection[i], i, collection);
+        var isArray = func(collection[i], i, collection);
         finalArray.push(isArray);
       } 
     } else {
         for(var key in collection) {
-            var isObj = funct(collection[key], key, collection);
+            var isObj = func(collection[key], key, collection);
             finalArray.push(isObj);
             }
         } return finalArray;
@@ -392,6 +393,22 @@ _.pluck = function(array, prop) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function(collection, action){
+    var boolean = true; 
+    
+    _.each(collection, function(element, index, collection){
+        if(typeof action === 'function' || action !== undefined){
+            if(action(element, index, collection)===false){
+                boolean = false; 
+            }
+        } else {
+            if(element === false){
+                boolean = false;
+            }
+        }
+    });
+    return boolean;
+}
 
 /** _.some
 * Arguments:
@@ -413,6 +430,21 @@ _.pluck = function(array, prop) {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+_.some = function(collection, action) {
+    var boolean = false;
+    _.each(collection, function(element, index, collection){
+        if(typeof action === 'function' || action !== undefined) {
+            if(action(element, index, collection) ===true){
+                boolean = true;
+            }
+        } else {
+            if(element === true){
+                boolean = true;
+            }
+        }
+    });
+    return boolean;
+}
 
 
 /** _.reduce
@@ -441,23 +473,35 @@ _.reduce = function(array, func, seed) {
         seed = array[0];
         //now, loop over every element using _.each function
         //starting at index 1, call func function on seed element & i
-        _.each(array, function(element, i, arr) { //<--not the same array!
+        _.each(array, function(element, index, arr) { //<--nvm they are not the samee array your right
             //making seed the value of the function call func
             //but we don't want it to loop through index 0
-                if( i !== 0) {
-                     seed = func(seed, element, i);
+                if( index !== 0) {
+                     seed = func(seed, element, index, arr);
                 }
         });
      return seed;
      // seed does exist, loop through array and call func function on seed element & i
     } else {
-        _.each(array, function(element, i, arr){ //<--not the same array!
+        // can you see this comment Nicole
+        
+        //nicole: Yes!
+        
+        // one sec
+        let previousResult = seed
+        _.each(array, function(element, index, arr) { //<--not the same array!
             //getting previous value bc we put seed in the array
-            seed = func(seed, element, i);
+            previousResult = func(previousResult, element, index,arr);
         });
-        return seed;
+        return previousResult;
     }
 };
+
+
+
+
+
+
 
 /** _.extend
 * Arguments:
@@ -473,6 +517,11 @@ _.reduce = function(array, func, seed) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+_.extend = function(object, ...args) {
+    Object.assign(object, ...args);
+    return object;
+}
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

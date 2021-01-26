@@ -16,7 +16,7 @@
  * false qualities of the input data. It is important to watch out for contradictions
  * or logical short-circuits.
  *
- * A. Truthy and Falsy
+ * 2. Truthy and Falsy
  *
  * Boolean values return true or false, and can be utilized to direct the actions of 
  * the code based on conditions. However, a variety of other data types evaluate as the
@@ -30,7 +30,7 @@
  * strings, and of course the boolean false. Statements evaluating to false will not run
  * the code block unless an exception is created in the code.
  *
- * B. if....else
+ * 3. if....else
  *
  * One example of a control flow statement is an 'if' statement. This evaluates a given
  * expression and then runs certain code if the conditions are met. Subsequent criteria
@@ -38,7 +38,7 @@
  * that can change the order of code execution based on whether the input satisfies 
  * specific criteria.
  *
- * C. Switch Statement
+ * 4. Switch Statement
  *
  * Switch statements are especially useful in a couple of situations. If a large number
  * of conditions are to be evaluated, switch statements are easily readable and can 
@@ -47,7 +47,7 @@
  * Alternatively, switch statements are useful if several conditions need to be met in 
  * order to return the same output. Switch statements generally evalue a single expression.
  *
- * D. Loops
+ * 5. Loops
  * 
  * Loops are used for completing repetitive tasks without the need for rewriting code
  * multiple times. Loops iterate through collections such as the characters in strings,
